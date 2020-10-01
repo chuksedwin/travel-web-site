@@ -1,0 +1,45 @@
+//bookings page created by Akachi
+doctype html
+html(lang="en")
+    head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Forgot Password
+    link(rel="stylesheet" href="./stylesheets/register.css")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css")
+    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous")
+    body
+    include includes/nav.pug
+    br
+    .cotainer
+        h1#register-header.text-center
+        | Enter the Required Data
+        form(method="POST" action="/resetpass")
+        .col-lg-10.offset-lg-1
+            h3 Forgot Password
+            .form-row
+            .form-group.col-md-6
+                label(for="Email") Email
+                input#Email.form-control(name="email")
+            .form-row
+            .form-group.col-md-6
+                label(for="Password") Old Password
+                input#OldPassword.form-control(name="oldpassword" type="Password")
+            .form-row
+            .form-group.col-md-6
+                label(for="Password") New Password
+                input#Password.form-control(name="password" type="Password")
+            .form-group.col-md-6
+                label(for="Password") Retype Password
+                input#reTypePassword.form-control(type="Password")
+            .form-row
+            br
+            br
+            br
+            button.btn.btn-primary.btn-block(type="submit") Reset
+        hr
+    include includes/footer.pug
+    br
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js")

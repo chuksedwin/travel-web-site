@@ -1,0 +1,80 @@
+//bookings page created by Stanley
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  title Become a Member
+  link(rel='stylesheet' href='./stylesheets/bookings.css')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css')
+  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous')
+include includes/nav.pug
+br
+.containerr
+  h1#register-header.text-center
+    | Please complete booking... 
+    form(method='POST' action='/bookings')
+      .col-lg-10.offset-lg-1
+        .form-row
+          .form-group.col-md-4
+            label(for='fName')
+            input#fName.form-control(name='firstName' type='Name' , value= user.firstName)
+          .form-group.col-md-4
+            label(for='lName')
+            input#lName.form-control(name='lastName' type='Name' , value= user.lastName)
+          .form-group.col-md-4
+            label(for='inputEmail4')
+            input#inputEmail4.form-control(name='email' type='email' , value= user.email)
+        .form-row  
+          .form-group.col-md-4
+            label(for='inputAddress')
+            input#inputAddress.form-control(name='address' type='text' placeholder='1234 Main St' , value=user.address)        
+          .form-group.col-md-4
+            label(for='City')
+            select#City.form-control(name='city' , value= user.city)
+              option(selected='') Calgary
+              option Vancouver
+              option Edmonton
+              option Toronto
+              option Quebec City
+              option Montreal
+              option Winnipeg City
+          .form-group.col-md-4
+            label(for='province')
+            select#province.form-control(name='province' , value=user.province)
+              option(selected='') Alberta
+              option British Columbia
+              option Ontorio
+              option Quebec
+              option Manitoba
+        .form-row  
+          .form-group.col-md-4
+            label(for='country')
+            select#country.form-control(name='country' , value=user.country)
+              option(selected='') Canada
+              option Europian Union
+              option Asia
+              option Africa
+              option South/Central America
+          .form-group.col-md-4
+            label(for='postal code')
+            input#postalCode.form-control(name='postalcode' type='text' , value=user.postalcode)
+          .form-group.col-md-4
+            label(for='home phone number')
+            input.form-control(name='homephone' type='text' id='home phone number' , value=user.homephone )
+        input#packageId(name="packageId" type="hidden")
+        input#packageId(name="userId" type="hidden")
+      ul.list-group.text-center(method='GET' action='/packages' style='font-size: 1.3rem')
+        each pkg , index in data
+          li.list-group-item='Package: ' +  pkg.PkgName
+          li.list-group-item='Start Date: ' +  pkg.PkgStartDate
+          li.list-group-item='End Date: ' +  pkg.PkgEndDate
+          li.list-group-item='Destination: ' +  pkg.PkgDesc
+          li.list-group-item='Base Price: ' +  '$' + pkg.PkgBasePrice
+      
+      
+      button.btn.btn-primary(method='POST' action='/bookings') Confirm Booking
+
+include includes/footer.pug
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js')

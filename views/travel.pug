@@ -1,0 +1,63 @@
+//bookings page created by Stanley
+doctype html
+html(lang="eng")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Index Page
+    link(rel="stylesheet", href="./stylesheets/travel.css")
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css")
+    link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous")
+  body
+    include includes/nav.pug
+    br
+    .caro
+      #demo.carousel.slide(data-ride="carousel")
+        ul.carousel-indicators
+          li.active(data-target="#demo" data-slide-to="0")
+          li(data-target="#demo" data-slide-to="1")
+          li(data-target="#demo" data-slide-to="2")
+        .carousel-inner
+          .carousel-item.active
+            img(src="https://images.pexels.com/photos/753626/pexels-photo-753626.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Los Angeles")
+            .carousel-caption
+              h3 Los Angeles
+              p We had such a great time in LA!
+          .carousel-item
+            img(src="https://images.pexels.com/photos/302549/pexels-photo-302549.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Chicago")
+            .carousel-caption
+              h3 Chicago
+              p Thank you, Chicago!
+          .carousel-item
+            img(src="https://cdn.pixabay.com/photo/2017/04/18/06/49/old-2237952_960_720.jpg" alt="Chicago")
+            .carousel-caption
+              h3 Mexico
+              p Always wonderful, Mexico!
+          .carousel-item
+            img(src="https://www.frosch.com/wp-content/uploads/2018/10/shutterstock_763428385-1.jpg?id=5315" alt="New York")
+            .carousel-caption
+              h3 New York
+              p We love the Big Apple!
+        a.carousel-control-prev(href="#demo" data-slide="prev")
+          span.carousel-control-prev-icon
+        a.carousel-control-next(href="#demo" data-slide="next")
+          span.carousel-control-next-icon
+    
+    section#main-content
+      h3(style="margin-bottom: 10px; text-align: center; font-style: italic; text-shadow: black;") check out our exclusive destinations
+      .row
+        a(href="/packages")
+          img#content-img.col-md-4(src="https://cdn.pixabay.com/photo/2017/04/18/06/49/old-2237952_960_720.jpg" alt="")
+          img#content-img.col-md-4(src="https://cdn.pixabay.com/photo/2014/06/06/20/08/cruise-ship-363804_960_720.jpg" alt="")
+          img#content-img.col-md-4(src="https://wwwnc.cdc.gov/travel/images/chairs-tropical-beach.jpg" alt="")
+          img#content-img.col-md-4(src="https://www.frosch.com/wp-content/uploads/2018/10/shutterstock_763428385-1.jpg?id=5315" alt="")
+          img#content-img.col-md-4(src="https://images.pexels.com/photos/1319829/pexels-photo-1319829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="")
+          img#content-img.col-md-4(src="https://images.pexels.com/photos/1268855/pexels-photo-1268855.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="")
+         
+    br
+    include includes/footer.pug
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js")
+
+    

@@ -1,0 +1,120 @@
+//bookings page created by Abdullah
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  title Become a Member
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css')
+  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous')
+  link(rel='stylesheet' href='./stylesheets/register.css')
+include includes/nav.pug
+br
+.container
+  h2#register-header.text-center(style='font-style: italic;')
+    | Become a Member and Get Top Choices to Travel to!
+  form(method='POST' action='/log-in')
+    .col-lg-10.offset-lg-1
+      h4 Already a member
+      .form-row
+        .form-group.col-md-4
+          label(for='Username') Username
+          input#Username.form-control(name='username' type='Name')
+        .form-group.col-md-4
+          label(for='Password') Password
+          input#Password.form-control(name='password' type='Password')
+        input#packageId(name="packageId" type="hidden")
+      button.btn.btn-primary(type='submit') Log in 
+      a(href='/forgotpass') I forgot my password
+  hr
+  form(method='POST' action='/users')
+    .col-lg-10.offset-lg-1
+      h4 A new member
+      .form-row
+        .form-group.col-md-4
+          label(for='fName') First Name
+          input#fName.form-control(name='firstName' type='Name')
+        .form-group.col-md-4
+          label(for='lName') Last Name
+          input#lName.form-control(name='lastName' type='Name')
+        .form-group.col-md-4
+          label(for='inputEmail4') Email
+          input#inputEmail4.form-control(name='email' type='email')
+      .form-row
+        .form-group.col-md-4
+          label(for='username') Username
+          input#username.form-control(name='username' type='Name')
+        .form-group.col-md-4
+          label(for='password') Password
+          input#password.form-control(name='password' type='password')
+        .form-group.col-md-4
+          label(for='retypePassword') Retype Password
+          input#retypePassword.form-control(type='password')
+      .form-group
+        label(for='inputAddress') Address
+        input#inputAddress.form-control(name='address' type='text' placeholder='1234 Main St')
+      .form-row
+        .form-group.col-md-3
+          label(for='City') City
+          select#City.form-control(name='city')
+            option(selected='') Calgary
+            option Vancouver
+            option Edmonton
+            option Toronto
+            option Quebec City
+            option Montreal
+            option Winnipeg City
+        .form-group.col-md-3
+          label(for='province') Province
+          select#province.form-control(name='province')
+            option(selected='') Alberta
+            option British Columbia
+            option Ontorio
+            option Quebec
+            option Manitoba
+        .form-group.col-md-3
+          label(for='country') Country
+          select#country.form-control(name='country')
+            option(selected='') Canada
+            option Europian Union
+            option Asia
+            option Africa
+            option South/Central America
+        .form-group.col-md-3
+          label(for='postal code') postal code
+          input#postalCode.form-control(name='postalcode' type='text')
+      .form-row
+        .form-group.col-md-6
+          label(for='home phone number') Home phone number
+          input.form-control(name='homephone' type='text' id='home phone number')
+        .form-group.col-md-6
+          label(for='business phone number') Business phone number
+          input.form-control(name='businessphone' type='text' id='business phone number')
+      input#packageId(name="packageId" type="hidden")
+      button.btn.btn-primary(type='submit') Sign in
+include includes/footer.pug
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js')
+script.
+  var inputs= document.querySelectorAll("#packageId");
+  function querySt(ji) {
+
+    hu = window.location.search.substring(1);
+    gy = hu.split("&");
+
+    for (i=0;i<gy.length;i++) {
+        ft = gy[i].split("=");
+        if (ft[0] == ji) {
+            return ft[1];
+        }
+    }
+  }
+  const pkgId = querySt("packageId");
+  if(!pkgId){
+    var arr = document.querySelectorAll("#packageId");
+    arr[0].remove();
+    arr[1].remove();
+  }
+  for(var i = 0; i < inputs.length;i++){
+    inputs[i].value= pkgId;
+  }

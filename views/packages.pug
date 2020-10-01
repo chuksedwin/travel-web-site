@@ -1,0 +1,47 @@
+//bookings page created by Akachi
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Index Page
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css")
+    link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous")
+    link(rel="stylesheet", href="./stylesheets/packages.css")
+  body
+    include includes/nav.pug
+    br
+    // Creat tabel with image and description 2 column & 4 image rows
+    .content-section
+      table#t1.table.table-dark.table-boarded.w-auto(style="border-radius: 10px")
+        thead#th1(style="text-align: center;")
+          tr
+            th#desc
+              | Description
+            th#imgs
+              | Images  
+            th#price
+              | Price
+            th#start
+              | Start
+            th#end
+              | End
+            th#book
+              | Book
+        tbody
+          each pkg , index in packages
+            tr
+              td= pkg.PkgDesc
+              td
+                img(src=images[index], alt="", width="100%", height="350px")
+              td= "$" + pkg.PkgBasePrice
+              td= pkg.PkgStartDate
+              td= pkg.PkgEndDate
+              td
+                a(href= isLoggedIn?"/bookings?packageId=" + pkg.PackageId : ("/register?packageId=" + pkg.PackageId), class="a_button") order
+
+    include includes/footer.pug
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js")
+    

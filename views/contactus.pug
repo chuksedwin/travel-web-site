@@ -1,0 +1,143 @@
+//bookings page created by Edwin
+doctype html
+head
+  meta(charset='utf-8')
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  title Become a Member
+  link(rel='stylesheet' href='./stylesheets/contactus.css')
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css')
+  link(rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous')
+  
+
+include includes/nav.pug
+.containerr  
+  h2#contacts-header.text-center(style= 'margin-bottom: 25px')
+    | Connect with us
+    //script(type='text/javascript').
+            var agents= #{s};
+            console.log(agents);
+     
+  table.table.table-hover
+    thead.thead-dark
+      tr
+        td Agency ID
+        td Address
+        td City
+        td Province
+        td PO
+        td Country
+        td Phone
+        td Fax
+    tbody#tb1
+      each row in agencies
+        tr.table-info
+          td= row.AgencyId
+          td= row.AgncyAddress
+          td= row.AgncyCity
+          td= row.AgncyProv
+          td= row.AgncyPostal
+          td= row.AgncyCountry
+          td= row.AgncyPhone
+          td= row.AgncyFax
+  
+  h3#contactformheader(style= 'margin-top: 45px')
+    |Get in touch
+  p(style= 'font-style: italic')
+    |Please fill out the quick form and we will be in touch
+  form.align-center(method="POST" , action="/contactus")
+    .form-row
+      .form-group.col-md-6
+        label(for='fName') First Name
+        input#fName.form-control(name='firstName' type='Name')
+    .form-row
+      .form-group.col-md-6
+        label(for='lName') Last Name
+        input#lName.form-control(name='lastName' type='Name')
+    .form-row
+      .form-group.col-md-6
+        label(for='inputEmail4') Email
+        input#inputEmail4.form-control(name='email' type='email')
+    .form-row
+      .form-group.col-md-6
+        label(for='message') Message
+        textarea#message.form-control(name='message' type='text' style= 'height: 200px' placeholder='Enter your comment here...') 
+    button.btn.btn-primary(type='submit') Send Feedback
+  
+include includes/footer.pug
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js')
+
+
+script.
+    //Using JQuery to send AJAX request and get the data, then load the data in the form
+    $(document).ready(function () {
+      const tb1 = document.querySelector("#tb1");
+      const trs= document.querySelectorAll("#tb1 tr");
+      for (let i = 0; i < trs.length; i++) { //creating the table row
+        const tr = trs[i]
+        //tr.id = data[i].AgencyId;
+        // tr.onclick = getAgents; // Calling this function to get the agents - for the selected agency
+        tr.onclick = () => {
+          getAgents(tr.cells[0].textContent, tr, tb1);
+        };
+      }
+    });
+    // This function will be called when the user clicks on one of the table cells for the agencies
+    function getAgents(agencyId, parent, table) {
+      // Target is the tble cell (td)
+      // target.currentTarget.id this has the id of the target agancy we stored as a TR.id
+      $.get("/contactus/" + agencyId, function (data, status) {
+        // sending the AJAX request to get the agents for the requested Agency ID
+        var temp = document.querySelectorAll("#temp");
+        if (temp) {
+          for (let i = 0; i < temp.length; i++) {
+            const tr = temp[i];
+            table.deleteRow(tr.rowIndex - 1);
+          }
+        }
+
+        if (data) {
+          // Agents data
+          var counter = createHeaders(parent, table);
+          for (let i = 0; i < data.length; i++) {
+            const tr = table.insertRow(counter);
+            tr.onclick = () => {
+              load(tr.cells[0].textContent)
+              load(tr.cells[tr.cells.length-1].textContent)
+            };
+            tr.id = "temp";
+            counter++;
+            tr.className = "table-warning";
+            for (let j = 0; j < Object.keys(data[i]).length; j++) {
+              const td = document.createElement("td");
+              const key = Object.keys(data[i])[j];
+              td.innerText = data[i][key];
+              tr.appendChild(td);
+            }
+          }
+        }
+      });
+    }
+
+    function createHeaders(parent, table) {
+      var headers = [
+        "AgentId",
+        "First Name",
+        "Initial",
+        "Last Name",
+        "Phone",
+        "Email",
+        "Position",
+        "AgencyId"
+      ];
+      var tr = table.insertRow(parent.rowIndex);
+      tr.id = "temp";
+      for (var i = 0; i < headers.length; i++) {
+        var td = tr.insertCell(i);
+        td.textContent = headers[i];
+      }
+      tr.classList.add("thead-dark");
+      return parent.rowIndex + 1;
+    }
+ 
